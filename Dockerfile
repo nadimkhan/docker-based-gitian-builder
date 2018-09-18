@@ -24,8 +24,8 @@ chown root.root /etc/sudoers.d/ubuntu && \
 chmod 0400 /etc/sudoers.d/ubuntu && \
 chown -R ubuntu.ubuntu /home/ubuntu
 USER ubuntu
-RUN printf "[[ -d /shared/bitcoin ]] || \
-git clone -b \$1 --depth 1 \$2 /shared/bitcoin && \
+RUN printf "[[ -d /shared/saviour ]] || \
+git clone -b \$1 --depth 1 \$2 /shared/saviour && \
 cd /shared/gitian-builder; \
 ./bin/gbuild --skip-image --commit saviour=\$1 --url saviour=\$2 \$3" > /home/ubuntu/runit.sh
 CMD ["v1.0.0.1","https://github.com/nadimkhan/saviour.git","../saviour/contrib/gitian-descriptors/gitian-linux.yml"]
