@@ -4,9 +4,12 @@ ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /shared
 RUN apt-get update && \
 apt-get --no-install-recommends -yq install \
+sudo \
 locales \
+libtool \
 git-core \
 build-essential \
+gcc-multilib \
 ca-certificates \
 ruby \
 rsync && \
@@ -28,5 +31,5 @@ RUN printf "[[ -d /shared/saviour ]] || \
 git clone -b \$1 --depth 1 \$2 /shared/saviour && \
 cd /shared/gitian-builder; \
 ./bin/gbuild --skip-image --commit saviour=\$1 --url saviour=\$2 \$3" > /home/ubuntu/runit.sh
-CMD ["v2.0.0","https://github.com/nadimkhan/saviour.git","../saviour/contrib/gitian-descriptors/gitian-linux.yml"]
+CMD ["v2.0.0.2","https://github.com/nadimkhan/saviour.git","../saviour/contrib/gitian-descriptors/gitian-linux.yml"]
 ENTRYPOINT ["bash", "/home/ubuntu/runit.sh"]
